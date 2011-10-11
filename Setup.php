@@ -1,5 +1,5 @@
 <?php
-require_once(Global.api);
+require_once(Global.php);
 
 StartDatabase();
 mysql_query("CREATE TABLE saves (id INT, name VARCHAR(256), votes INT, upvotes INT, downvotes INT, author VARCHAR(256), data VARCHAR(65535), views INT) TYPE=innodb;");
