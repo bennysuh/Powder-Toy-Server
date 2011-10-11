@@ -11,18 +11,21 @@ function StartDatabase(){
 function CloseDatabase($Connection){
 	mysql_close($Connection);
 }
-
-/*function LogEvent($Event, $UserId, $Connection) { //Event is the log message. E.g. 
+/*
+function LogEvent($Event, $UserId, $Connection) { //Event is the log message. E.g. 
 	$Year = date("Y");
 	$Month = date("F");
 	$Day = date("l");
-	mkdir("./Logs/".$Year."/".$Month."/".$Day);
+	mkdir("Logs");
+	mkdir("Logs/".$Year);
+	mkdir("Logs/".$Year."/".$Month);
+	mkdir("Logs/".$Year."/".$Month."/".$Day);
 	$FileName = "Cookie.jar";
 	$FileHandle = fopen($FileName, 'a') or die("Can't open file!");
 	$UserId = mysql_real_escape_string($UserId);
 	$QueryData = mysql_query("SELECT name FROM users WHERE id = '".$UserID."';", $Connection);
-    $Result = mysql_fetch_array($QueryData)
-	$UserName = $Result["name"];
+	$Row = mysql_fetch_array($QueryData)
+	$UserName = $Row["name"];
 	mysql_free_result($QueryData);
 	$LogData = date("d/m/Y h:i:s A")." | ".$UserName." ".$Event."\n";
 	fwrite($FileHandle, $LogData);
