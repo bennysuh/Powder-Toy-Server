@@ -1,5 +1,5 @@
 <?php
-require_once("Global.api");
+require_once("Global.php");
 
 if(isset($_GET["Query"])){
 	$Settings["Query"] = $_GET["Query"];
