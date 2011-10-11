@@ -1,8 +1,9 @@
 <?php
 require_once("Settings.php");
-
+global $Database;
 function StartDatabase(){
-	$Connection = mysql_connect($Database["Username"], $Database["Password"]);
+    global $Database;
+	$Connection = mysql_connect($Database["Host"],$Database["Username"], $Database["Password"]);
 	mysql_select_db($Database["Database"]);
 	return $Connection;
 }
