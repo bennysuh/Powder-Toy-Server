@@ -1,5 +1,5 @@
 <?php
-$Database["Username"] = "";
-$Database["Password"] = "";
-$Database["Database"] = "";
+$Database["Username"] = "root";
+$Database["Password"] = "root";
+$Database["Database"] = "testingdb";
 ?>

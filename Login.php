@@ -11,8 +11,6 @@ foreach(getallheaders() as $Name => $Value) {
 }
 $Settings["Hash"] = mysql_real_escape_string($Settings["Hash"]);
 $Settings["User"] = mysql_real_escape_string($Settings["User"]);
-//$User["Hash"]="b3f15e8156c41b717074e384c92ec771";
-//$User["Name"]="doxin";
 $Result = mysql_query("SELECT * FROM users WHERE passhash='".$Settings["Hash"]."' AND name='".$User["Name"]."';", $Settings["Connection"]);
 while($Row = mysql_fetch_array($QueryData)) {
 	$User["SessionId"] = CreateSessionId();
