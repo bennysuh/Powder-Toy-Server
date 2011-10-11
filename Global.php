@@ -1,5 +1,5 @@
 <?php
-require_once("Settings.api");
+require_once("Settings.php");
 
 function StartDatabase(){
 	$Connection = mysql_connect($Database["Username"], $Database["Password"]);
