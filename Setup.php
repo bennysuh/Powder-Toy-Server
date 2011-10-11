@@ -2,7 +2,8 @@
 require_once("Global.php");
 require_once("Settings.php");
 global $Database;
-$Connnection = StartDatabase();
+global $Connnection;
+$Connection = StartDatabase();
 $Queries=explode(file_get_contents("dump.sql"), ";");
 array_pop($Queries);
 $Good=True;
