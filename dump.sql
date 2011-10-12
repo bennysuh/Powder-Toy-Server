@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8 NOT NULL,
   `profile` int(11) DEFAULT NULL,
-  `permissions` int(11) DEFAULT 0,
   `join_timestamp` int(11) DEFAULT 0,
   `passhash` varchar(32) CHARACTER SET utf8 NOT NULL,
   `mode` varchar(3) CHARACTER SET utf8 NOT NULL,
