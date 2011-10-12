@@ -43,4 +43,21 @@ function CreateSessionId()
 {
     return substr(uniqid("").uniqid("").uniqid(""),0,31);
 }
+
+function HasPermission($safe_userid,$safe_permission,$Connection)
+{
+global $Database;
+global $Connnection;
+$res=mysql_query("SELECT * FROM `permissions<>users`,`permissions`
+    WHERE `permissions`.name LIKE '$safe_permission'
+    AND  `permissions<>users`.permissionid = `permissions`.id
+    AND `permissions<>users`.userid = $safe_userid",$Connection);
+if($res)
+    if(mysql_fetch_array($res))
+        return true;
+    else
+        return false;
+else
+    return false;
+}
 ?>
