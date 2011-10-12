@@ -16,7 +16,7 @@ if($Result) {
 	$ExpireDate = time()+(60*60*24);
 	mysql_query("INSERT INTO sessions (sessionid,userid,expiredate) VALUES ".$SessionId.",".$UserId.",".$ExpireDate." ON DUPLICATE KEY UPDATE id=".$UserId.";", $Connection);
 	echo "OK ".$User["Id"]." ".$SessionId." 0 ".$Mode;
-	LogEvent("logged in. Version: ".$Version.", Session-Id: ".$SessionId"].".", $UserId, $Connection);
+	LogEvent("logged in. Version: ".$Version.", Session-Id: ".$SessionId.".", $UserId, $Connection);
 }
 else {
 	print "Username or Password incorrect.";
