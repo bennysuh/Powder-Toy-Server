@@ -53,7 +53,7 @@ $res=mysql_query("SELECT * FROM `permissions<>users`,`permissions`
     AND  `permissions<>users`.permissionid = `permissions`.id
     AND `permissions<>users`.userid = $safe_userid",$Connection);
 if($res)
-    if(mysql_fetch_array($res))
+  m   if(mysql_fetch_array($res))
         return true;
     else
         return false;
@@ -62,6 +62,14 @@ else
 }
 
 function Login($Name, $Hash, $Connection){
+	if(!isset($Name)){
+		echo "Username or Password incorrect.";
+		return false;
+	}
+	if(!isset($Hash)) {
+		echo "Username or Password incorrect.";
+		return false;
+	}
 	$Hash = mysql_real_escape_string($Hash);
 	$Name = mysql_real_escape_string($Name);
 	$Result = mysql_query("SELECT * FROM users WHERE passhash='".$Hash."' AND name='".$Name."';", $Connection);
@@ -76,7 +84,7 @@ function Login($Name, $Hash, $Connection){
 		return true;
 	}
 	else {
-		print "Username or Password incorrect.";
+		echo "Username or Password incorrect.";
 		return false;
 	}
 }
