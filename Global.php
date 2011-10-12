@@ -72,7 +72,7 @@ function Login($Name, $Hash, $Connection){
 		$Mode = $Row["mode"];
 		$ExpireDate = time()+(60*60*24);
 		mysql_query("INSERT INTO sessions (sessionid,userid,expiredate) VALUES ".$SessionId.",".$UserId.",".$ExpireDate." ON DUPLICATE KEY UPDATE id=".$UserId.";", $Connection);
-		echo "OK ".$User["Id"]." ".$SessionId." 0 ".$Mode;
+		echo "OK ".$UserId." ".$SessionId." 0 ".$Mode;
 		return true;
 	}
 	else {
