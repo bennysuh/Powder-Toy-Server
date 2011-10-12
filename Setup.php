@@ -2,27 +2,29 @@
 require_once("Global.php");
 require_once("Settings.php");
 global $Database;
-$con = StartDatabase();
+global $Connnection;
+$Connection = StartDatabase();
 $Queries=explode(file_get_contents("dump.sql"), ";");
 array_pop($Queries);
-$good=True;
+$Good=True;
 foreach($Queries as $Query)
 {
-    $Result=mysql_query($Query,$con);
-    if($result)
+    $Result=mysql_query($Query,$Connection);
+    if($Result)
         echo "";
     else
         {
-        echo mysql_error()."<br>";
-        $good=false;
+            echo mysql_error()."<br>";
+        	$Good=false;
         }
     
 }
-if($good)
-    echo "sucessfull undump";
+
+if($Good)
+    echo "Successfully Loaded Database!";
 else
 {
-    echo "whoops! something went wrong.";
+    echo "Whoops! Something went wrong. Make sure you have the dump.sql file in this folder.";
 }
-CloseDatabase($con);
+CloseDatabase($Connection);
 ?>
