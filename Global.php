@@ -22,14 +22,14 @@ function LogEvent($Event, $UserId, $Connection) { //Event is the log message. E.
 	mkdir("Logs/".$Year);
 	mkdir("Logs/".$Year."/".$Month);
 	mkdir("Logs/".$Year."/".$Month."/".$Day);
-	$FileName = "Cookie.jar";
+	$FileName = "Logs/".$Year."/".$Month."/".$Day."/Cookie.jar";
 	$FileHandle = fopen($FileName, 'a') or die("Can't open file!");
 	$UserId = mysql_real_escape_string($UserId);
 	$QueryData = mysql_query("SELECT name FROM users WHERE id = '".$UserID."';", $Connection);
 	$Row = mysql_fetch_array($QueryData);
 	$UserName = $Row["name"];
 	mysql_free_result($QueryData);
-	$LogData = date("d/m/Y h:i:s A")." | ".$UserName." ".$Event."\n";
+	$LogData = date("d/m/Y h:i:s A")." | ".$UserName." ".$Event."\r\n";
 	fwrite($FileHandle, $LogData);
 	fclose($ourFileHandle);
 }
