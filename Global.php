@@ -60,4 +60,38 @@ if($res)
 else
     return false;
 }
+
+function Login($Name, $Hash, $Connection){
+	$Hash = mysql_real_escape_string($Hash);
+	$Name = mysql_real_escape_string($Name);
+	$Result = mysql_query("SELECT * FROM users WHERE passhash='".$Hash."' AND name='".$Name."';", $Connection);
+	if($Result) {
+		$Row = mysql_fetch_array($Result);
+		$SessionId = CreateSessionId();
+		$UserId = $Row["id"];
+		$Mode = $Row["mode"];
+		$ExpireDate = time()+(60*60*24);
+		mysql_query("INSERT INTO sessions (sessionid,userid,expiredate) VALUES ".$SessionId.",".$UserId.",".$ExpireDate." ON DUPLICATE KEY UPDATE id=".$UserId.";", $Connection);
+		echo "OK ".$User["Id"]." ".$SessionId." 0 ".$Mode;
+		return true;
+	}
+	else {
+		print "Username or Password incorrect.";
+		return false;
+	}
+}
+
+function Search($Query, $Start, $Count, $Connection){
+	$Query = mysql_real_escape_string($Query);
+	$QueryData = mysql_query("SELECT saves.* FROM saves,tags WHERE saves.id = tags.id AND saves.name,tags.name LIKE '%".$Query."%' ORDER BY saves.votes;", $Connection);
+	if(!$QueryData){
+		echo "0 1 404 404 0 Error Save Doesn't Exist\r\n";
+		return 0;
+	}
+	ob_start();
+	for($i = $Start; ($Row = mysql_fetch_array($QueryData)) == true || $i<$Count; $i++) {
+		echo $Row["saves.id"]." 1 ".$Row["saves.votes"]." ".$Row["upvotes"]." ".$Row["downvotes"]." ".$Row["author"]." ".$Row["name"]."\r\n";
+	}
+	ob_end_flush();
+}
 ?>

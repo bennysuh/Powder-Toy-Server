@@ -25,12 +25,6 @@ if($Session == NULL) $Session = 0;
 $Version = $Headers["X-Powder-Version"];
 if($Version == NULL) $Version = 0;
 $Connection = StartDatabase();
-$Query = mysql_real_escape_string($Query);
-$QueryData = mysql_query("SELECT saves.* FROM saves,tags WHERE saves.id = tags.id AND saves.name,tags.name LIKE '%".$Query."%' ORDER BY saves.votes;", $Connection);
-ob_start();
-for($i = $Start; ($Row = mysql_fetch_array($QueryData)) == true || $i<$Count; $i++) {
-	echo $Row["saves.id"]." 1 ".$Row["saves.votes"]." ".$Row["upvotes"]." ".$Row["downvotes"]." ".$Row["author"]." ".$Row["name"]."\r\n";
-}
-ob_end_flush();
+Search($Query, $Start, $Count, $Connection);
 CloseDatabase($Connection);
 ?>
