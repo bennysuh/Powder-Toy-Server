@@ -53,7 +53,7 @@ $res=mysql_query("SELECT * FROM `permissions<>users`,`permissions`
     AND  `permissions<>users`.permissionid = `permissions`.id
     AND `permissions<>users`.userid = $safe_userid",$Connection);
 if($res)
-  m   if(mysql_fetch_array($res))
+    if(mysql_fetch_array($res))
         return true;
     else
         return false;
