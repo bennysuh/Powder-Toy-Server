@@ -17,20 +17,21 @@ if(!isset($_GET["Count"])){
 else{
 	$Settings["Count"] = $_GET["Count"];
 }
-foreach(getallheaders() as $Name => $Value) {
-	if($Name == "X-Auth-User-Id"):
-		$User["ID"] = $Value;
-	elseif($Name == "X-Auth-Session-Key"):
-		$User["Session"] = $Value;
-	elseif($Name == "X-Powder-Version"):
-		$User["Version"] = $Value;
-}
+$Headers = getallheaders();
+$User["ID"] = $Headers["X-Auth-User-Id"];
+if($User["ID"] == NULL) $User["ID"] = 0;
+$User["Session"] = $Headers["X-Auth-Session-Key"];
+if($User["Session"] == NULL) $User["Session"] = 0;
+$User["Version"] = $Headers["X-Powder-Version"];
+if($User["Version"] == NULL) $User["Version"] = 0;
 $Settings["Connection"] = StartDatabase();
 LogEvent("searched ".$Settings["Query"], $Settings["ID"], $Settings["Connection"]);
 $Settings["Query"] = mysql_real_escape_string($Settings["Query"]);
 $QueryData = mysql_query("SELECT saves.* FROM saves,tags WHERE saves.id = tags.id AND saves.name,tags.name LIKE '%".$Settings["Query"]."%' ORDER BY saves.votes;", $Settings["Connection"]);
+ob_start();
 for($i = 0; ($Row = mysql_fetch_array($QueryData)) == true || $i<$Settings["Count"]; $i++) {
 	echo $Row["saves.id"]." 1 ".$Row["saves.votes"]." ".$Row["upvotes"]." ".$Row["downvotes"]." ".$Row["author"]." ".$Row["name"]."\r\n";
 }
+ob_end_flush();
 CloseDatabase($Settings["Connection"]);
 ?>
