@@ -14,7 +14,7 @@ if($Result) {
 	$UserId = $Row["id"];
 	$Mode = $Row["mode"];
 	$ExpireDate = time()+(60*60*24);
-	mysql_query("INSERT INTO sessions (sessionid,userid,expiredate) VALUES ".$User["SessionId"].",".$User["Id"].",".$Settings["ExpireDate"]." ON DUPLICATE KEY UPDATE id=".$User["Id"].";", $Settings["Connection"]);
+	mysql_query("INSERT INTO sessions (sessionid,userid,expiredate) VALUES ".$SessionId.",".$UserId.",".$ExpireDate." ON DUPLICATE KEY UPDATE id=".$UserId.";", $Connection);
 	echo "OK ".$User["Id"]." ".$SessionId." 0 ".$Mode;
 	LogEvent("logged in. Version: ".$Version.", Session-Id: ".$SessionId"].".", $UserId, $Connection);
 }
