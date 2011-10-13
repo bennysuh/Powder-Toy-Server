@@ -1,2 +1,3 @@
 RewriteEngine On
 RewriteRule ^(.+)\.api $1.php
+RewriteRule ^(.+?)/(.+) Plugin.php?plugin=$1&filename=$2
