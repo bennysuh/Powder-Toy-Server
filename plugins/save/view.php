@@ -1,5 +1,5 @@
 <?PHP
-require_once("Global.php");
+require_once("../../Global.php");
 $PerPage=6;
 
 if (!(isset($_GET['page']))) 
